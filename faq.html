@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Oakside Roleplay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: white;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 20% 80%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 90%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 10px, rgba(44, 200, 59, 0.02) 10px, rgba(44, 200, 59, 0.02) 12px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(20, 20, 20, 0.95);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover {
+            background-color: rgba(44, 200, 59, 0.1);
+            color: #2cc83b;
+        }
+
+        .nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #2cc83b;
+            transition: width 0.3s;
+        }
+
+        .nav a:hover:after {
+            width: 80%;
+        }
+
+        .page-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: #2cc83b;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .faq-section {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .faq-section:nth-child(2) { animation-delay: 0.2s; }
+        .faq-section:nth-child(3) { animation-delay: 0.3s; }
+        .faq-section:nth-child(4) { animation-delay: 0.4s; }
+        .faq-section:nth-child(5) { animation-delay: 0.5s; }
+        .faq-section:nth-child(6) { animation-delay: 0.6s; }
+
+        .question {
+            font-size: 1.4rem;
+            color: #2cc83b;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .question::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: #2cc83b;
+            border-radius: 2px;
+        }
+
+        .answer {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .answer a {
+            color: #2cc83b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .answer a:hover {
+            color: #2cc83b;
+            text-decoration: underline;
+        }
+
+        .perk-list {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .perk-item {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .perk-item::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            color: #2cc83b;
+        }
+
+        .footer {
+            background-color: #0c0c0c;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #2cc83b;
+        }
+
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .final-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: rgba(44, 200, 59, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(44, 200, 59, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <img src="https://i.imgur.com/MQgq9Lw.png" alt="Oakside Roleplay" class="nav-logo" onclick="window.location.href='index.html'">
+        <a href="https://www.roblox.com/communities/35239817/Oakside-Roleplay-ER-LC#!/about" target="_blank">Group</a>
+        <a href="about.html">About Us</a>
+        <a href="contributors.html">Oakside's Contributors</a>
+        <a href="faq.html">FAQ</a>
+        <a href="departments.html">Our Departments</a>
+    </nav>
+
+    <div class="page-content">
+        <h1 class="page-title">Frequently Asked Questions</h1>
+
+        <div class="faq-section">
+            <h2 class="question">How can I be a moderator?</h2>
+            <p class="answer">
+                You can be a moderator by applying <a href="https://www.ermbot.xyz/1294035136907710474/d4c3f2e0-f0c5-42f5-a895-f3f5b0076493/application" target="_blank">here</a>.
+            </p>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="question">I was banned. How can I appeal it?</h2>
+            <p class="answer">
+                If you were banned in-game, open a <strong>Ban Appeal</strong> ticket in our <strong>#assistance</strong> channel and a manager will review it. If you were banned on Discord, you can appeal it <a href="https://ermbot.xyz/1294035136907710474/4b840c0f-d693-4938-8d11-81858762b3fb/application" target="_blank">here</a>.
+            </p>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="question">How can I report a moderator, a department member, or a regular member?</h2>
+            <p class="answer">
+                If you believe a moderator, department member, or a regular member has violated a rule and would like to report them, open a report ticket corresponding to their role in <strong>#⁠assistance</strong>. You must have sufficient evidence or proof to support your claims, or your report will be discarded.
+            </p>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="question">What are the perks to boosting?</h2>
+            <p class="answer">
+                We offer a large variety of booster perks for our valued members, including:
+                <ul class="perk-list">
+                    <li class="perk-item">Exclusive server booster role</li>
+                    <li class="perk-item">$5,000 daily in our <strong>#economy</strong> channel</li>
+                    <li class="perk-item">Ability to use files in all channels</li>
+                    <li class="perk-item">Get a special shoutout in <strong>#supporters</strong></li>
+                    <li class="perk-item">Ability to use external emojis/stickers</li>
+                    <li class="perk-item">Access to booster only vehicles</li>
+                    <li class="perk-item">Access to Oakside Regional Police and slicktops</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="question">What are the perks to Oakside+?</h2>
+            <p class="answer">
+                We offer a ton of different perks for Oakside+, including:
+                <ul class="perk-list">
+                    <li class="perk-item">Exclusive <strong>@Oakside+</strong> role</li>
+                    <li class="perk-item">$10,000 daily in our <strong>#economy</strong> channel</li>
+                    <li class="perk-item">Sneak peeks and early previews on future updates</li>
+                    <li class="perk-item">Ability to use files in all channels</li>
+                    <li class="perk-item">Get a special shoutout in  <strong>#supporters</strong></li>
+                    <li class="perk-item">Ability to use external emojis/stickers</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="final-note">
+            <p>Have any more questions? Open a support ticket in our <a href="https://discord.gg/xuM5wK3a4x" style="color: #2cc83b; text-decoration: none;" target="_blank">Discord server</a>!</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contributors.html">Oakside's Contributors</a>
+            <a href="faq.html">FAQ</a>
+            <a href="departments.html">Our Departments</a>
+        </div>
+        <p class="copyright">© 2025 Oakside Roleplay. Website created by arc_xde. All rights reserved.</p>
+    </footer>
+</body>
+</html>
