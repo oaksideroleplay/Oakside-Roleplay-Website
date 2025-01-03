@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Oakside Roleplay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: white;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 20% 80%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 90%, rgba(44, 200, 59, 0.03) 0%, transparent 20%),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 10px, rgba(44, 200, 59, 0.02) 10px, rgba(44, 200, 59, 0.02) 12px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(20, 20, 20, 0.95);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            height: 40px;
+            width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover {
+            background-color: rgba(44, 200, 59, 0.1);
+            color: #2cc83b;
+        }
+
+        .nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #2cc83b;
+            transition: width 0.3s;
+        }
+
+        .nav a:hover:after {
+            width: 80%;
+        }
+
+        .page-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: #2cc83b;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.4s; }
+        .content-section:nth-child(4) { animation-delay: 0.6s; }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2cc83b;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: #2cc83b;
+            margin-right: 1rem;
+            border-radius: 2px;
+        }
+
+        .marketplace-item {
+            background: rgba(44, 200, 59, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .marketplace-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-title {
+            color: #2cc83b;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-link {
+            display: inline-block;
+            background: #2cc83b;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .item-link:hover {
+            background: #25a031;
+        }
+
+        .perks-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .perks-list li {
+            margin-bottom: 0.5rem;
+            color: #ddd;
+        }
+
+        .perks-list li::before {
+            content: '➔';
+            color: #2cc83b;
+            margin-right: 0.5rem;
+        }
+
+        .footer {
+            background-color: #0c0c0c;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #2cc83b;
+        }
+
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <img src="https://i.imgur.com/MQgq9Lw.png" alt="Oakside Roleplay" class="nav-logo" onclick="window.location.href='index.html'">
+        <a href="https://www.roblox.com/communities/35239817/Oakside-Roleplay-ER-LC#!/about" target="_blank">Group</a>
+        <a href="about.html">About Us</a>
+        <a href="contributors.html">Oakside's Contributors</a>
+        <a href="faq.html">FAQ</a>
+        <a href="departments.html">Our Departments</a>
+        <a href="marketplace.html">Marketplace</a>
+    </nav>
+
+    <div class="page-content">
+        <h1 class="page-title">Marketplace</h1>
+
+        <div class="content-section">
+            <h2 class="section-title">Donations</h2>
+            <div class="marketplace-item">
+                <h3 class="item-title">Small Donation</h3>
+                <p class="item-price">100 Robux</p>
+                <a href="https://www.roblox.com/catalog/105794416311562/Small-Donation" class="item-link" target="_blank">Purchase</a>
+            </div>
+            <div class="marketplace-item">
+                <h3 class="item-title">Medium Donation</h3>
+                <p class="item-price">400 Robux</p>
+                <a href="https://www.roblox.com/catalog/76301480584788/Medium-Donation" class="item-link" target="_blank">Purchase</a>
+            </div>
+            <div class="marketplace-item">
+                <h3 class="item-title">Large Donation</h3>
+                <p class="item-price">750 Robux</p>
+                <a href="https://www.roblox.com/catalog/73289780484012/Large-Donation" class="item-link" target="_blank">Purchase</a>
+            </div>
+            <div class="marketplace-item">
+                <h3 class="item-title">Mega Donation</h3>
+                <p class="item-price">1250 Robux</p>
+                <a href="https://www.roblox.com/catalog/73289780484012/Large-Donation" class="item-link" target="_blank">Purchase</a>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Boosting/Oakside+</h2>
+            <div class="marketplace-item">
+                <h3 class="item-title">Oakside+</h3>
+                <p class="item-price">350 Robux</p>
+                <ul class="perks-list">
+                    <li>Exclusive @Oakside+ role</li>
+                    <li>$10,000 daily in our #economy channel</li>
+                    <li>Sneak peeks and early previews on future updates</li>
+                    <li>Ability to use files in all channels</li>
+                    <li>Get a special shoutout in #supporters</li>
+                    <li>Ability to use external emojis/stickers</li>
+                </ul>
+                <a href="https://www.roblox.com/catalog/135415550428951/Oakside" class="item-link" target="_blank">Purchase</a>
+            </div>
+            <div class="marketplace-item">
+                <h3 class="item-title">Server Booster Perks</h3>
+                <ul class="perks-list">
+                    <li>Exclusive server booster role</li>
+                    <li>$5,000 daily in our #economy channel</li>
+                    <li>Ability to use files in all channels</li>
+                    <li>Get a special shoutout in #supporters</li>
+                    <li>Ability to use external emojis/stickers</li>
+                    <li>Access to booster only vehicles</li>
+                    <li>Access to Oakside Regional Police and slicktops</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Staff Uniform</h2>
+            <p style="color: #ff6b6b; margin-bottom: 1rem;">ONLY PURCHASE IF YOU'RE A STAFF MEMBER</p>
+            <div class="marketplace-item">
+                <h3 class="item-title">Staff Polo</h3>
+                <p class="item-price">5 Robux</p>
+                <a href="https://www.roblox.com/catalog/125602134814387/Oakside-Roleplay-Staff-Polo" class="item-link" target="_blank">Purchase</a>
+            </div>
+            <div class="marketplace-item">
+                <h3 class="item-title">Staff Pants</h3>
+                <p class="item-price">5 Robux</p>
+                <a href="https://www.roblox.com/catalog/86277908377143/Oakside-Roleplay-Khaki-Pants" class="item-link" target="_blank">Purchase</a>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">LEO Uniforms</h2>
+            <p style="color: #888; font-style: italic;">COMING SOON!</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">FD/EMS Uniforms</h2>
+            <p style="color: #888; font-style: italic;">COMING SOON!</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="contributors.html">Oakside's Contributors</a>
+            <a href="faq.html">FAQ</a>
+            <a href="departments.html">Departments</a>
+            <a href="marketplace.html">Marketplace</a>
+        </div>
+        <p class="copyright">© 2025 Oakside Roleplay. Website created by arc_xde. All rights reserved.</p>
+    </footer>
+</body>
+</html>
